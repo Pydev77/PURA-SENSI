@@ -1,0 +1,154 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PURA SENSI - ORGANIZAÇÃO</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #007BFF, #ffffff);
+      color: #000;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+    body::before {
+      content: "PURA SENSI";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 8rem;
+      color: transparent;
+      background: linear-gradient(90deg, red, orange, yellow, red);
+      background-size: 400% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      animation: fire 3s infinite linear;
+      white-space: nowrap;
+      pointer-events: none;
+      z-index: 0;
+    }
+    @keyframes fire {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    header {
+      background: #0056b3;
+      color: white;
+      padding: 20px;
+      width: 100%;
+      text-align: center;
+      font-size: 2rem;
+      font-weight: bold;
+      z-index: 1;
+    }
+    .container {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      margin-top: 30px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      width: 90%;
+      max-width: 500px;
+      z-index: 1;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+    button {
+      background: #007BFF;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    .contact-panel {
+      margin-top: 30px;
+      background: #f0f8ff;
+      padding: 15px;
+      border-radius: 10px;
+      display: none;
+    }
+    .contact-panel p {
+      margin: 5px 0;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <header>PURA SENSI - ORGANIZAÇÃO</header>
+  <div class="container">
+    <label for="tipo">Tipo de partida:</label>
+    <select id="tipo">
+      <option value="xgrupo">xgrupo</option>
+      <option value="x4">x4</option>
+      <option value="x6">x6</option>
+    </select>
+
+    <label for="data">Data:</label>
+    <input type="date" id="data" required />
+
+    <label for="hora">Horário:</label>
+    <input type="time" id="hora" required />
+
+    <label for="grupo">Nome do grupo:</label>
+    <input type="text" id="grupo" placeholder="Digite o nome do grupo" required />
+
+    <label for="organizador">Nome do organizador:</label>
+    <input type="text" id="organizador" placeholder="Digite seu nome" required />
+
+    <label for="contato">Escolha um número para envio:</label>
+    <select id="contato">
+      <option value="557398676116">Felipe</option>
+      <option value="558981482455">Mari</option>
+      <option value="5577988881514">Isa</option>
+    </select>
+
+    <button onclick="enviarMensagem()">Confirmar e Enviar</button>
+
+    <div class="contact-panel" id="painel">
+      <h3>Contatos Disponíveis</h3>
+      <p>Felipe - 55 73 98676-116</p>
+      <p>Mari - 55 89 8148-2455</p>
+      <p>Isa - 55 77 98888-1514</p>
+    </div>
+  </div>
+
+  <script>
+    function enviarMensagem() {
+      const tipo = document.getElementById('tipo').value;
+      const data = document.getElementById('data').value;
+      const hora = document.getElementById('hora').value;
+      const grupo = document.getElementById('grupo').value;
+      const organizador = document.getElementById('organizador').value;
+      const contato = document.getElementById('contato').value;
+
+      const mensagem = `Partida marcada:\nTipo: ${tipo}\nData: ${data}\nHora: ${hora}\nGrupo: ${grupo}\nOrganizador: ${organizador}`;
+      const link = `https://wa.me/${contato}?text=${encodeURIComponent(mensagem)}`;
+
+      window.open(link, '_blank');
+      document.getElementById('painel').style.display = 'block';
+    }
+  </script>
+</body>
+</html>
